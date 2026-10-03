@@ -1,8 +1,8 @@
-# Azure Arc Onboarding: Sending On-Prem Windows Logs to Microsoft Sentinel
+# Azure Arc On-boarding: Sending On-Prem Windows Logs to Microsoft Sentinel
 
-Onboarding domain-joined Windows machines to Azure Arc with Group Policy, then collecting their Security event logs in Microsoft Sentinel through the Azure Monitor Agent.
+On-boarding domain-joined Windows machines to Azure Arc with Group Policy, then collecting their Security event logs in Microsoft Sentinel through the Azure Monitor Agent.
 
-This project covers the **telemetry pipeline**. The detection rules built on top of this data are documented in the [Detection Engineering project](../detection-engineering) (update this link to your repo).
+This project covers the **telemetry pipeline**. The detection rules built on top of this data are documented in the (https://github.com/Tigerlove101/Detection-Engineering/tree/main)
 
 
 <img width="2420" height="1540" alt="image" src="https://github.com/user-attachments/assets/e4b612df-bb6d-48c9-90d5-aeb32c783186" />
@@ -36,9 +36,9 @@ Build a reliable, repeatable way to get endpoint logs from an on-prem Active Dir
 ## Prerequisites
 
 - Azure subscription, resource group, Log Analytics workspace with Microsoft Sentinel enabled
-- Service principal with the **Azure Connected Machine Onboarding** role
+- Service principal with the **Azure Connected Machine On-boarding** role
 - Domain-joined machines with outbound HTTPS access to Azure
-- A network share readable by the target machines, for the onboarding package
+- A network share readable by the target machines, for the on-boarding package
 
 ## Implementation
 
@@ -48,13 +48,13 @@ Created the resource group and Log Analytics workspace, then enabled Microsoft S
 
 <img width="944" height="421" alt="Screenshot 2026-10-03 002829" src="https://github.com/user-attachments/assets/fec5f892-25d1-491d-9f50-3430815a8d04" />
 
-### 2. Service principal and onboarding script
-Created a service principal limited to the onboarding role and generated the multi-server onboarding script from Azure Arc.
+### 2. Service principal and on-boarding script
+Created a service principal limited to the on-boarding role and generated the multi-server on-boarding script from Azure Arc.
 <img width="916" height="452" alt="Screenshot 2026-10-03 003245" src="https://github.com/user-attachments/assets/d753cdab-4869-45db-a404-878b2aa932e0" />
 The script are generated automatically in the process. Service principal client secret is added before running the script on the AD DC. 
 
 ### 3. Group Policy deployment
-- Placed the onboarding package on a network share
+- Placed the on-boarding package on a network share
 - Created the GPO on `Mo-svr` and linked it to the workstation OU
 - Applied with `gpupdate /force` and verified with `gpresult /r`
 
@@ -88,24 +88,24 @@ Events collected: 4624, 4625, 4720, 4769. etc.
 
 ### Issue 1: GPO applied but the Arc agent did not install
 - **Symptom:** The GPO reported success but machines did not appear in Azure Arc.
-- **Investigation:** gpresult, share permissions, script path, service principal, network access, event logs.
-- **Root cause:** Wrong configuration during arc script onboarding wrong path to the shared folder.]
-- **Fix:** corrected the syntax error and it got fixed and script ran succesfully.
+- **Investigation:** I checked the gpresult, share permissions, script path, service principal, network access, event logs.
+- **Root cause:** Wrong configuration during arc script on-boarding wrong path to the shared folder.
+- **Fix:** corrected the syntax error and it got fixed and script ran successfully.
 
 ### Issue 2: Logs arrived in the wrong table
 - **Symptom:** MO1 and MO2 were collecting through the generic Windows Event Log data source, so Security events were not in the `SecurityEvent` table that detection rules query.
-- **Fix:** [describe the change, for example switching to the Windows Security Events via AMA collection and associating the DCR with each machine]
+- **Fix:** switching to the Windows Security Events via AMA collection and associating the DCR with each machine.
 - **Result:** All Arc machines now report into `SecurityEvent`.
 
 ## Verification checklist
 
 | Check | Result |
 |---|---|
-| Machines show Connected in Azure Arc | [ ] |
-| AMA extension installed on each machine | [ ] |
-| DCR associated with each machine | [ ] |
-| `SecurityEvent` returns events from every machine | [ ] |
-| Expected event IDs present (4624, 4625, and others) | [ ] |
+| Machines show Connected in Azure Arc | [yes] |
+| AMA extension installed on each machine | [yes] |
+| DCR associated with each machine | [yes] |
+| `SecurityEvent` returns events from every machine | [yes] |
+| Expected event IDs present (4624, 4625, and others) | [yes] |
 
 ## Security considerations
 
@@ -114,9 +114,6 @@ Events collected: 4624, 4625, 4720, 4769. etc.
 - Least-privilege onboarding role
 - DCR scoped to the events needed, which also controls ingestion cost
 
-## Outcome
-
-Domain-joined endpoints are onboarded through Group Policy and send Security events to Microsoft Sentinel. This pipeline is the data source for the (https://github.com/Tigerlove101/Detection-Engineering/tree/main)
 
 ## Skills demonstrated
 
