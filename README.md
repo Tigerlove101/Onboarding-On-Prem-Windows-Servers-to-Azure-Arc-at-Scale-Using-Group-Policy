@@ -5,6 +5,8 @@ On-boarding domain-joined Windows machines to Azure Arc with Group Policy, then 
 This project covers the **telemetry pipeline**. The detection rules built on top of this data are documented in the (https://github.com/Tigerlove101/Detection-Engineering/tree/main)
 
 
+## Lab Architecture 
+
 <img width="2420" height="1540" alt="image" src="https://github.com/user-attachments/assets/e4b612df-bb6d-48c9-90d5-aeb32c783186" />
 
 
@@ -109,9 +111,9 @@ Events collected: 4624, 4625, 4720, 4769. etc.
 
 ## Security considerations
 
-- Service principal secret is not stored in the repo or the GPO share beyond what onboarding requires, and is rotated or removed after onboarding
+- Service principal secret is not stored in the repo or the GPO share beyond what on-boarding requires, and is rotated or removed after on-boarding
 - Tenant and subscription IDs redacted in screenshots
-- Least-privilege onboarding role
+- Least-privilege on-boarding role
 - DCR scoped to the events needed, which also controls ingestion cost
 
 
