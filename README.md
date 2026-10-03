@@ -82,7 +82,7 @@ All Arc machines report into the `SecurityEvent` table.
 <img width="950" height="473" alt="Screenshot 2026-10-03 004956" src="https://github.com/user-attachments/assets/a591f0de-b4dc-4f67-a553-bc1d3f3ec61b" />
 
 
-Events collected: 4624, 4625, 4720, (confirm against your DCR).
+Events collected: 4624, 4625, 4720, 4769. etc.
 
 ## Issues encountered and fixes
 
