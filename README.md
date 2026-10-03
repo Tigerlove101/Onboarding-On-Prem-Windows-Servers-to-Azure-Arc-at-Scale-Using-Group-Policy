@@ -116,7 +116,7 @@ Events collected: 4624, 4625, 4720, 4769. etc.
 
 ## Outcome
 
-Domain-joined endpoints are onboarded through Group Policy and send Security events to Microsoft Sentinel. This pipeline is the data source for the [loading]
+Domain-joined endpoints are onboarded through Group Policy and send Security events to Microsoft Sentinel. This pipeline is the data source for the (https://github.com/Tigerlove101/Detection-Engineering/tree/main)
 
 ## Skills demonstrated
 
